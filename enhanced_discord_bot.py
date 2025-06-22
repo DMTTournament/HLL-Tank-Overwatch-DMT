@@ -571,7 +571,7 @@ class StartControls(discord.ui.View):
         
         if crcon_connected:
             clock.auto_switch = os.getenv('CRCON_AUTO_SWITCH', 'false').lower() == 'true'
-            await clock.crcon_client.send_message("🎯 DMT #1 Time Keeper Match Started! Center point control timer active.")
+            await clock.crcon_client.send_message("🎯 DMT #1 Time Keeper Started! Center point control timer active.")
             await interaction.edit_original_response(content="✅ Match started with CRCON!")
         else:
             await interaction.edit_original_response(content="✅ Match started (CRCON connection failed)")
