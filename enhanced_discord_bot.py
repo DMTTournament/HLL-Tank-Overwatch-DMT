@@ -384,12 +384,12 @@ class ClockState:
             self.clock_started = True
         
         # Send notification to game (if messaging works)
-        if self.crcon_client:
-            team_name = "Allies" if team == "A" else "Axis"
+        # if self.crcon_client:
+            #team_name = "Allies" if team == "A" else "Axis"
             # Get current control times for both teams
-            allies_time = self.format_time(self.total_time('A'))
-            axis_time = self.format_time(self.total_time('B'))
-            await self.crcon_client.send_message(f"🔄 {team_name} captured the center point! | Allies: {allies_time} | Axis: {axis_time}")
+            # allies_time = self.format_time(self.total_time('A'))
+            # axis_time = self.format_time(self.total_time('B'))
+            # await self.crcon_client.send_message(f"🔄 {team_name} captured the center point! | Allies: {allies_time} | Axis: {axis_time}")
         
         # IMPORTANT: Update the Discord embed immediately
         if self.message:
@@ -570,9 +570,9 @@ class StartControls(discord.ui.View):
         crcon_connected = await clock.connect_crcon()
         
         if crcon_connected:
-            clock.auto_switch = os.getenv('CRCON_AUTO_SWITCH', 'false').lower() == 'true'
-            await clock.crcon_client.send_message("🎯 DMT Time Keeper Started! Center point control timer active.")
-            await interaction.edit_original_response(content="✅ Match started with CRCON!")
+           clock.auto_switch = os.getenv('CRCON_AUTO_SWITCH', 'false').lower() == 'true'
+           # await clock.crcon_client.send_message("🎯 DMT Time Keeper Started! Center point control timer active.")
+           await interaction.edit_original_response(content="✅ Match started with CRCON!")
         else:
             await interaction.edit_original_response(content="✅ Match started (CRCON connection failed)")
 
@@ -639,8 +639,8 @@ class TimerControls(discord.ui.View):
         await interaction.response.defer()
         await clock.message.edit(embed=build_embed(clock), view=self)
         
-        if clock.crcon_client:
-            await clock.crcon_client.send_message(f"🤖 Auto-switch {status}")
+        # if clock.crcon_client:
+           # await clock.crcon_client.send_message(f"🤖 Auto-switch {status}")
 
     @discord.ui.button(label="📊 Stats", style=discord.ButtonStyle.secondary)
     async def show_stats(self, interaction: discord.Interaction, button: discord.ui.Button):
@@ -725,7 +725,7 @@ class TimerControls(discord.ui.View):
             else:
                 winner_msg = "Perfect tie - equal control time!"
             
-            await clock.crcon_client.send_message(
+           # await clock.crcon_client.send_message(
                 f"🏁 Match Complete! {winner_msg} Allies: {clock.format_time(clock.time_a)} | Axis: {clock.format_time(clock.time_b)}"
             )
 
@@ -795,12 +795,12 @@ class TimerControls(discord.ui.View):
             clock.switches.append(switch_data)
 
         # Send notification
-        if clock.crcon_client:
-            team_name = "Allies" if team == "A" else "Axis"
+        # if clock.crcon_client:
+            # team_name = "Allies" if team == "A" else "Axis"
             # Get current control times for both teams
-            allies_time = clock.format_time(clock.total_time('A'))
-            axis_time = clock.format_time(clock.total_time('B'))
-            await clock.crcon_client.send_message(f"⚔️ {team_name} captured the center point! | Allies: {allies_time} | Axis: {axis_time}")
+            # allies_time = clock.format_time(clock.total_time('A'))
+            # axis_time = clock.format_time(clock.total_time('B'))
+           # await clock.crcon_client.send_message(f"⚔️ {team_name} captured the center point! | Allies: {allies_time} | Axis: {axis_time}")
 
         await interaction.response.defer()
         await clock.message.edit(embed=build_embed(clock), view=self)
@@ -905,8 +905,8 @@ async def auto_stop_match(clock: ClockState, game_info: dict):
             else:
                 winner_msg = "Perfect tie - equal control time!"
             
-            await clock.crcon_client.send_message(
-                f"🏁 Match Complete! {winner_msg} Allies: {clock.format_time(clock.time_a)} | Axis: {clock.format_time(clock.time_b)}"
+           # await clock.crcon_client.send_message(
+               # f"🏁 Match Complete! {winner_msg} Allies: {clock.format_time(clock.time_a)} | Axis: {clock.format_time(clock.time_b)}"
             )
 
         # Create final embed
