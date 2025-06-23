@@ -727,7 +727,7 @@ class TimerControls(discord.ui.View):
             
            # await clock.crcon_client.send_message(
                # f"🏁 Match Complete! {winner_msg} Allies: {clock.format_time(clock.time_a)} | Axis: {clock.format_time(clock.time_b)}"
-            )
+           # )
 
         # Create final embed
         embed = discord.Embed(title="🏁 Match Complete - Time Control Results!", color=0x800020)
