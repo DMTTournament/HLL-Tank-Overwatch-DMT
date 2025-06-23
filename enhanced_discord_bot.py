@@ -479,7 +479,7 @@ def user_is_admin(interaction: discord.Interaction):
 def build_embed(clock: ClockState):
     """Build Discord embed focused on TIME CONTROL"""
     embed = discord.Embed(
-        title="🎯 🔥 DMT #1 Time Keeper 🔥 🎯",
+        title="🎯 🔥 DMT Time Keeper 🔥 🎯",
         description="**Control the center point to win!**",
         color=0x800020
     )
@@ -571,7 +571,7 @@ class StartControls(discord.ui.View):
         
         if crcon_connected:
             clock.auto_switch = os.getenv('CRCON_AUTO_SWITCH', 'false').lower() == 'true'
-            await clock.crcon_client.send_message("🎯 DMT #1 Time Keeper Started! Center point control timer active.")
+            await clock.crcon_client.send_message("🎯 DMT Time Keeper Started! Center point control timer active.")
             await interaction.edit_original_response(content="✅ Match started with CRCON!")
         else:
             await interaction.edit_original_response(content="✅ Match started (CRCON connection failed)")
@@ -814,7 +814,7 @@ async def log_results(clock: ClockState, game_info: dict):
     if not results_channel:
         return
     
-    embed = discord.Embed(title="🏁 DMT #1 Time Keeper Match Complete", color=0x800020)
+    embed = discord.Embed(title="🏁 DMT Time Keeper Match Complete", color=0x800020)
     embed.add_field(name="🇺🇸 Allies Control Time", value=f"`{clock.format_time(clock.time_a)}`", inline=True)
     embed.add_field(name="🇩🇪 Axis Control Time", value=f"`{clock.format_time(clock.time_b)}`", inline=True)
     
@@ -949,7 +949,7 @@ async def auto_stop_match(clock: ClockState, game_info: dict):
         logger.error(f"Error in auto_stop_match: {e}")
 
 # Bot commands
-@bot.tree.command(name="reverse_clock", description="Start the DMT #1 Time Keeper time control clock")
+@bot.tree.command(name="reverse_clock", description="Start the DMT Time Keeper time control clock")
 async def reverse_clock(interaction: discord.Interaction):
     channel_id = interaction.channel_id
     clocks[channel_id] = ClockState()
@@ -957,7 +957,7 @@ async def reverse_clock(interaction: discord.Interaction):
     embed = build_embed(clocks[channel_id])
     view = StartControls(channel_id)
 
-    await interaction.response.send_message("✅ DMT #1 Time Keeper clock ready!", ephemeral=True)
+    await interaction.response.send_message("✅ DMT Time Keeper clock ready!", ephemeral=True)
     posted_message = await interaction.channel.send(embed=embed, view=view)
     clocks[channel_id].message = posted_message
 
@@ -1092,7 +1092,7 @@ async def send_server_message(interaction: discord.Interaction, message: str):
 
 @bot.tree.command(name="help_clock", description="Show help for the time control clock")
 async def help_clock(interaction: discord.Interaction):
-    embed = discord.Embed(title="🎯 DMT #1 Time Keeper Help", color=0x0099ff)
+    embed = discord.Embed(title="🎯 DMT Time Keeper Help", color=0x0099ff)
     
     embed.add_field(
         name="📋 Commands",
@@ -1184,13 +1184,13 @@ async def on_ready():
     try:
         synced = await bot.tree.sync()
         logger.info(f"✅ Synced {len(synced)} slash commands")
-        print(f"🎉 DMT #1 Time Keeper ready! Use /reverse_clock to start")
+        print(f"🎉 DMT Time Keeper ready! Use /reverse_clock to start")
     except Exception as e:
         logger.error(f"❌ Command sync failed: {e}")
 
 # Main execution
 if __name__ == "__main__":
-    print("🚀 Starting DMT #1 Time Keeper Bot...")
+    print("🚀 Starting DMT Time Keeper Bot...")
     
     # Check for Discord token
     token = os.getenv("DISCORD_TOKEN")
