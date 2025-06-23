@@ -907,7 +907,7 @@ async def auto_stop_match(clock: ClockState, game_info: dict):
             
            # await clock.crcon_client.send_message(
                # f"🏁 Match Complete! {winner_msg} Allies: {clock.format_time(clock.time_a)} | Axis: {clock.format_time(clock.time_b)}"
-            )
+           # )
 
         # Create final embed
         embed = discord.Embed(title="🏁 Match Complete - Time Control Results!", color=0x800020)
