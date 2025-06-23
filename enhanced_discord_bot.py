@@ -726,7 +726,7 @@ class TimerControls(discord.ui.View):
                 winner_msg = "Perfect tie - equal control time!"
             
            # await clock.crcon_client.send_message(
-                f"🏁 Match Complete! {winner_msg} Allies: {clock.format_time(clock.time_a)} | Axis: {clock.format_time(clock.time_b)}"
+               # f"🏁 Match Complete! {winner_msg} Allies: {clock.format_time(clock.time_a)} | Axis: {clock.format_time(clock.time_b)}"
             )
 
         # Create final embed
